@@ -117,6 +117,18 @@ class XMLContentHandler(ContentHandler):
         return data
 
 
+class TextXMLContentHandler(ContentHandler):
+    name = "text/xml"
+    regex = re.compile(r'^text\/xml.*')
+
+    def validate_request(self, request):
+        # Don't validate, leave stream for user to read
+        xml_content = request.body
+        data = xmltodict.parse(xml_content)
+        request.xml = data
+        return data
+
+
 class JSONContentHandler(ContentHandler):
     name = "application/json"
     regex = re.compile(r'^application\/json.*|^.*\+json$')

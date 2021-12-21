@@ -10,7 +10,7 @@ def is_xml_mimetype(mimetype):
         maintype, subtype = mimetype.split('/')  # type: str, str
     except (ValueError, AttributeError):
         return False
-    xml = maintype == 'application' and subtype.startswith("xml")
+    xml = (maintype == 'application' or maintype == 'text') and subtype.startswith("xml")
     return xml
 
 
